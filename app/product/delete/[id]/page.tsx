@@ -1,5 +1,16 @@
 import { fetchCategory, fetchSingleProduct } from "@/app/_action";
 import FormDelete from "@/components/product/delete/FormDelete";
+import { Metadata } from "next";
+
+export const generateMetadata = ({
+  params,
+}: {
+  params: { id?: string };
+}): Metadata => {
+  return {
+    title: `Delete - Product - ${params.id}`,
+  };
+};
 
 export default async function Delete({ params }: { params: { id: string } }) {
   const category = await fetchCategory();

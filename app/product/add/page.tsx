@@ -1,6 +1,12 @@
 import { fetchCategory } from "@/app/_action";
 import FormAdd from "@/components/product/add/FormAdd";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Add Product",
+};
+
 export default async function Add() {
   const category = await fetchCategory();
 

@@ -3,6 +3,19 @@ import Link from "next/link";
 import { ProductListType } from "@/types/global";
 import SearchBar from "@/components/SearchBar";
 import ProductList from "@/components/ProductList";
+import { Metadata } from "next";
+
+export const generateMetadata = ({
+  searchParams,
+}: {
+  searchParams: { page?: number; q?: string };
+}): Metadata => {
+  return {
+    title:
+      `Search For - ${searchParams.q}` +
+      `${searchParams.page ? " - Page " + searchParams.page : ""}`,
+  };
+};
 
 const fetchProducts = async (searchParams: { page?: number; q?: string }) => {
   const link = !searchParams.page

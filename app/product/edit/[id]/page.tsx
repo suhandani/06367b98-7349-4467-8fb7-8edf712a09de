@@ -1,5 +1,16 @@
 import { fetchCategory, fetchSingleProduct } from "@/app/_action";
 import FormEdit from "@/components/product/edit/FormEdit";
+import { Metadata } from "next";
+
+export const generateMetadata = ({
+  params,
+}: {
+  params: { id?: string };
+}): Metadata => {
+  return {
+    title: `Update - Product - ${params.id}`,
+  };
+};
 
 export default async function Edit({ params }: { params: { id: string } }) {
   const category = await fetchCategory();
