@@ -67,3 +67,11 @@ export async function deleteEntry(id: string) {
 
 }
 
+export async function fetchCategory() {
+  const category = await fetch("https://dummyjson.com/products/categories");
+
+  if (!category.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return category.json();
+}

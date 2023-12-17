@@ -1,13 +1,5 @@
+import { fetchCategory } from "@/app/_action";
 import FormAdd from "@/components/product/add/FormAdd";
-
-export async function fetchCategory() {
-  const category = await fetch("https://dummyjson.com/products/categories");
-
-  if (!category.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return category.json();
-}
 
 export default async function Add() {
   const category = await fetchCategory();
