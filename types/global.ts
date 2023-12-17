@@ -7,5 +7,19 @@ export interface ProductListType {
     stock: number;
     brand: string;
     category: string;
+    description: string;
     thumbnail: string;
+  }
+
+  export interface ProductModal{
+    data: {
+      title: string;
+      price: string;
+      rating: string;
+      stock: string;
+      brand: string;
+      category: string;
+      description: string;
+    };
+    type: string;
   }

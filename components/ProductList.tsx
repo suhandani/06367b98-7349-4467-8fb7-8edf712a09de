@@ -32,12 +32,20 @@ export default function ProductList({ product }: Props) {
         </Link>
       </td>
       <td className="py-2 px-4">
-        <button className="text-blue-500 hover:underline mr-2" type="button">
+        <Link
+          href={"/product/edit/" + product.id}
+          className="text-blue-500 hover:underline mr-2"
+          type="button"
+        >
           Edit
-        </button>
-        <button className="text-red-500 hover:underline" type="button">
+        </Link>
+        <Link
+          href={"/product/delete/" + product.id}
+          className="text-red-500 hover:underline"
+          type="button"
+        >
           Delete
-        </button>
+        </Link>
       </td>
     </tr>
   );

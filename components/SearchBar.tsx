@@ -25,7 +25,7 @@ export default function SearchBar() {
       </button>
 
       <Link
-        href="/add"
+        href="/product/add"
         className="bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
         type="button"
       >
