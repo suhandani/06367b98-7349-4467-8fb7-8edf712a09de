@@ -1,16 +1,16 @@
 "use client";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import { z } from "zod";
 import { FormSchema } from "@/lib/schema";
 import { deleteEntry } from "@/app/_action";
-import { useRouter } from "next/navigation";
 import ModalSuccess from "../ModalSuccess";
 
 type Inputs = z.infer<typeof FormSchema>;
 interface Props {
-  category: [];
+  category: string[];
   product: Inputs;
   id: string;
 }

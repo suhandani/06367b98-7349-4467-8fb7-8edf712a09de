@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { ProductListType } from "@/types/global";
+import Image from "next/image";
 
 interface Props {
   product: ProductListType;
@@ -10,7 +11,12 @@ export default function ProductList({ product }: Props) {
   return (
     <tr className="border-b hover:bg-gray-100 transition text-center">
       <td className="py-2 px-4">
-        <img className="object-fill h-24 w-60" src={product.thumbnail} />
+        <Image
+          src={product.thumbnail}
+          alt={product.title}
+          width={480}
+          height={480}
+        />
       </td>
       <td className="py-2 px-4 h-24 w-60">{product.title}</td>
       <td className="py-2 px-4">${product.price}</td>

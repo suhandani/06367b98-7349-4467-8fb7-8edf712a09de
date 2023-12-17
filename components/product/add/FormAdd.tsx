@@ -10,7 +10,7 @@ import ModalSuccess from "../ModalSuccess";
 type Inputs = z.infer<typeof FormSchema>;
 
 interface Props {
-  category: [];
+  category: string[];
 }
 
 export default function FormAdd({ category }: Props) {

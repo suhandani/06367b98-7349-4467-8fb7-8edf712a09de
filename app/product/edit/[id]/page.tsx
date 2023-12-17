@@ -1,22 +1,5 @@
+import { fetchCategory, fetchSingleProduct } from "@/app/_action";
 import FormEdit from "@/components/product/edit/FormEdit";
-
-export async function fetchCategory() {
-  const category = await fetch("https://dummyjson.com/products/categories");
-
-  if (!category.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return category.json();
-}
-
-export async function fetchSingleProduct(id: string) {
-  const product = await fetch("https://dummyjson.com/products/" + id);
-
-  if (!product.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return product.json();
-}
 
 export default async function Edit({ params }: { params: { id: string } }) {
   const category = await fetchCategory();

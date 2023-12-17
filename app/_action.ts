@@ -75,3 +75,12 @@ export async function fetchCategory() {
   }
   return category.json();
 }
+
+export async function fetchSingleProduct(id: string) {
+  const product = await fetch("https://dummyjson.com/products/" + id);
+
+  if (!product.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return product.json();
+}
