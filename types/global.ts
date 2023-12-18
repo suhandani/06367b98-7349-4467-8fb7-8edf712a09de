@@ -1,14 +1,15 @@
 export interface ProductListType {
-    id: number;
+    id: string;
     title: string;
-    price: number;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
+    price: string;
+    discountPercentage: string;
+    rating: string;
+    stock: string;
     brand: string;
     category: string;
     description: string;
     thumbnail: string;
+    images: string[];
   }
 
   export interface ProductModal{
@@ -20,6 +21,8 @@ export interface ProductListType {
       brand: string;
       category: string;
       description: string;
+      thumbnail: string;
+      images: string[]
     };
     type: string;
   }

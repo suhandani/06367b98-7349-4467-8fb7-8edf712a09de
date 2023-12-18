@@ -14,8 +14,9 @@ export default function ProductList({ product }: Props) {
         <Image
           src={product.thumbnail}
           alt={product.title}
-          width={480}
-          height={480}
+          width={200}
+          height={200}
+          priority
         />
       </td>
       <td className="py-2 px-4 h-24 w-60">{product.title}</td>

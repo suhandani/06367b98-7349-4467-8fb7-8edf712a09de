@@ -1,27 +1,37 @@
 "use client";
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 import { z } from "zod";
 import { FormSchema } from "@/lib/schema";
 import { deleteEntry } from "@/app/_action";
 import ModalSuccess from "../ModalSuccess";
+import { ProductListType } from "@/types/global";
 
 type Inputs = z.infer<typeof FormSchema>;
 interface Props {
   category: string[];
-  product: Inputs;
+  product: ProductListType;
   id: string;
 }
 
 export default function FormDelete({ category, product, id }: Props) {
-  const [data, setData] = useState<Inputs>();
+  const [data, setData] = useState<ProductListType>();
   const router = useRouter();
+  const resImages = product.images.map((url) => {
+    return {
+      url,
+    };
+  });
 
-  const { register, handleSubmit, reset } = useForm<Inputs>();
+  const { register, handleSubmit, reset, control } = useForm<Inputs>({
+    defaultValues: { images: resImages },
+  });
+  const { fields, append, remove } = useFieldArray({ control, name: "images" });
 
-  const processForm: SubmitHandler<Inputs> = async (data) => {
+  const processForm: SubmitHandler<Inputs> = async () => {
     const result = await deleteEntry(id);
 
     if (!result) {
@@ -36,6 +46,25 @@ export default function FormDelete({ category, product, id }: Props) {
     <>
       <form onSubmit={handleSubmit(processForm)}>
         <div className="mb-4">
+          <div className="mb-4">
+            <Image
+              src={product.thumbnail}
+              alt={product.title}
+              width={200}
+              height={200}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm capitalize font-medium text-gray-600">
+              Thumbnail Image URL
+            </label>
+            <input
+              {...register("thumbnail")}
+              className="mt-1 p-2 w-full border rounded-md"
+              defaultValue={product.thumbnail}
+              disabled
+            />
+          </div>
           <div className="mb-4">
             <label className="block text-sm capitalize font-medium text-gray-600">
               Title
@@ -121,6 +150,21 @@ export default function FormDelete({ category, product, id }: Props) {
             className="mt-1 p-2 w-full border rounded-md"
           ></textarea>
         </div>
+
+        {fields.map((field, index: number) => {
+          return (
+            <div className="mb-4" key={field.id}>
+              <label className="block text-sm capitalize font-medium text-gray-600">
+                Image {index + 1}
+              </label>
+              <input
+                {...register(`images.${index}.url`)}
+                className="mt-1 p-2 w-full border rounded-md"
+                disabled
+              />
+            </div>
+          );
+        })}
 
         <div className="flex items-center justify-end">
           <button

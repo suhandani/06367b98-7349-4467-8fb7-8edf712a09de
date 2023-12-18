@@ -1,4 +1,5 @@
 import { ProductModal } from "@/types/global";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function ModalSuccessAdd({ data, type }: ProductModal) {
@@ -24,6 +25,14 @@ export default function ModalSuccessAdd({ data, type }: ProductModal) {
                     Success {type} Data
                   </h3>
                   <div className="mt-3">
+                    <p>
+                      <Image
+                        src={data.thumbnail}
+                        alt={data.title}
+                        width={200}
+                        height={200}
+                      />
+                    </p>
                     <p className="text-sm text-gray-500">
                       Title : {data.title}
                     </p>
@@ -45,6 +54,13 @@ export default function ModalSuccessAdd({ data, type }: ProductModal) {
                     <p className="text-sm text-gray-500">
                       Description : {data.description}
                     </p>
+                    {data.images.map((image, index: number) => {
+                      return (
+                        <p className="text-sm text-gray-500" key={index}>
+                          Images {index + 1} : {image}
+                        </p>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

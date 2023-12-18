@@ -7,8 +7,13 @@ type Inputs = z.infer<typeof FormSchema>
 
 export async function addEntry(data: Inputs) {
   const result = FormSchema.safeParse(data)
+
+  
   
   if (result.success) {
+    const images = result.data.images.map(function (obj) {
+      return obj.url;
+    });
     const res = await fetch("https://dummyjson.com/products/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,6 +25,8 @@ export async function addEntry(data: Inputs) {
         brand: result.data.brand,
         category: result.data.category,
         description: result.data.description,
+        thumbnail: result.data.thumbnail,
+        images: images,
       }),
     });
     const data = await res.json();
@@ -35,6 +42,9 @@ export async function editEntry(data: Inputs, id: string) {
   const result = FormSchema.safeParse(data)
   
   if (result.success) {
+    const images = result.data.images.map(function (obj) {
+      return obj.url;
+    });
     const res = await fetch("https://dummyjson.com/products/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -46,6 +56,8 @@ export async function editEntry(data: Inputs, id: string) {
         brand: result.data.brand,
         category: result.data.category,
         description: result.data.description,
+        thumbnail: result.data.thumbnail,
+        images: images,
       }),
     });
     const data = await res.json();

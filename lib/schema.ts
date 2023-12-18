@@ -21,4 +21,10 @@ export const FormSchema = z.object({
     brand: zodString("Brand"),
     category: zodString("Category"),
     description: zodString("Description"),
+    thumbnail: z
+    .string()
+    .regex(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g, { message: "Thumbnail Must be Image URL" })
+    .min(1, { message: "Thumbnail field is required" }),
+    images: z.array(z.object({url:z.string().regex(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/g, { message: "Thumbnail Must be Image URL" })
+    .min(1, { message: "Thumbnail field is required" })}))
   });
